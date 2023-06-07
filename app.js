@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 
+require("dotenv").config();
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.trguitc.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
 const helmet = require("helmet");
 const compression = require("compression");
@@ -8,7 +9,6 @@ const morgan = require("morgan");
 
 const path = require("path");
 const fs = require("fs");
-const https = require("https");
 
 const errorController = require("./controllers/error");
 
