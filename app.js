@@ -2,10 +2,13 @@ const express = require("express");
 const app = express();
 
 require("dotenv").config();
-const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.trguitc.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
+// const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.trguitc.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
+const MONGODB_URI = `mongodb+srv://Ahmed_Adel:Ahmed_123456789@cluster0.trguitc.mongodb.net/shop?retryWrites=true&w=majority`;
 const helmet = require("helmet");
 const compression = require("compression");
 const morgan = require("morgan");
+// ac-b8rmipw-shard-00-01.trguitc.mongodb.net:27017
+// mongodb+srv://Ahmed_Adel:Ahmed_123456789@cluster0.trguitc.mongodb.net/todo-V2?retryWrites=true&w=majority
 
 const path = require("path");
 const fs = require("fs");
@@ -27,6 +30,9 @@ const multer = require("multer");
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
+    if (!fs.existsSync(path.join(__dirname, "images"))) {
+      fs.mkdirSync(path.join(__dirname, "images"), { recursive: true });
+    }
     cb(null, "images");
   },
 
@@ -67,6 +73,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: store,
+    cookie: { maxAge: 12 * 60 * 60 * 1000 },
   })
 );
 

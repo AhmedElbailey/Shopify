@@ -52,7 +52,7 @@ exports.postAddProduct = (req, res, next) => {
     });
   }
   // 2) Create new product and save it in DB
-  let imagePath = image.path;
+  let imagePath = image.path.replace("\\", "/");
   const product = new Product({
     title: title,
     price: price,
@@ -168,7 +168,6 @@ exports.getProducts = (req, res, next) => {
 ////////////////////////////////////////////////
 exports.deleteProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  console.log(prodId);
   // Delete image from folder
   Product.findById(prodId)
     .then((product) => {
