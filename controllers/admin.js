@@ -30,7 +30,7 @@ exports.postAddProduct = (req, res, next) => {
         price: price,
         description: description,
       },
-      errorMessage: "Attached file is not an image.",
+      errorMessage: "Image must be png, jpg or jpeg",
       validationErrors: [],
     });
   }
@@ -106,6 +106,23 @@ exports.postEditProduct = (req, res, next) => {
   const updatedPrice = req.body.price;
   const updatedImage = req.file;
   const updatedDesc = req.body.description;
+
+  if (!updatedImage) {
+    return res.status(422).render("admin/edit-product", {
+      pageTitle: "Edit Product",
+      path: "/admin/edit-product",
+      editing: true,
+      product: {
+        title: updatedTitle,
+        price: updatedPrice,
+        description: updatedDesc,
+        _id: prodId,
+      },
+      hasError: true,
+      errorMessage: "Image must be png, jpg or jpeg",
+      validationErrors: [],
+    });
+  }
 
   // 1) Check validation errors
   const errors = validationResult(req);
