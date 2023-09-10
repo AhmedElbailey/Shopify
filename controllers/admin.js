@@ -133,7 +133,7 @@ exports.postEditProduct = (req, res, next) => {
       product.description = updatedDesc;
       if (updatedImage) {
         fileHelper.deleteFile(product.imageUrl);
-        product.imageUrl = updatedImage.path;
+        product.imageUrl = updatedImage.path.replace("\\", "/");
       }
       return product.save();
     })
