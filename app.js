@@ -2,8 +2,7 @@ const express = require("express");
 const app = express();
 
 require("dotenv").config();
-// const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.trguitc.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
-const MONGODB_URI = `mongodb+srv://Ahmed_Adel:Ahmed_123456789@cluster0.trguitc.mongodb.net/shop?retryWrites=true&w=majority`;
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.trguitc.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
 const helmet = require("helmet");
 const compression = require("compression");
 const morgan = require("morgan");
